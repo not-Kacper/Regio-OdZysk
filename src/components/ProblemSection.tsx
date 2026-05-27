@@ -1,21 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
-import {
-  AlertTriangle,
-  BarChart3,
-  ClipboardCheck,
-  Droplets,
-  Gauge,
-  Recycle,
-  ShieldCheck,
-  TrendingUp,
-  Truck,
-} from 'lucide-react';
+import { AlertTriangle, ArrowRight, Droplets, Factory, Gauge, Recycle, ShieldCheck } from 'lucide-react';
 
 const AnimatedNumber = ({ to }: { to: number }) => {
   const nodeRef = useRef(null);
   const isInView = useInView(nodeRef, { once: true, margin: '-60px' });
-  const spring = useSpring(0, { damping: 36, stiffness: 95 });
+  const spring = useSpring(0, { damping: 34, stiffness: 92 });
   const display = useTransform(spring, (current) => Math.floor(current).toLocaleString('pl-PL'));
 
   useEffect(() => {
@@ -27,141 +17,97 @@ const AnimatedNumber = ({ to }: { to: number }) => {
   return <motion.span ref={nodeRef}>{display}</motion.span>;
 };
 
-const facts = [
-  {
-    icon: Droplets,
-    value: '250-300',
-    unit: 'mln m³',
-    label: 'wody rocznie',
-    note: 'zużycie w przemyśle FMCG',
-  },
-  {
-    icon: Recycle,
-    value: '80',
-    unit: '%',
-    label: 'pobranej wody',
-    note: 'wraca do systemu jako ściek',
-    animated: true,
-  },
-  {
-    icon: Gauge,
-    value: '200-240',
-    unit: 'mln m³',
-    label: 'ścieków rocznie',
-    note: 'wolumen uzasadnia model hubowy',
-  },
-];
-
-const riskMap = [
-  {
-    risk: 'rosnące koszty compliance',
-    answer: 'stabilny odbiór i oczyszczanie ścieków',
-    icon: TrendingUp,
-  },
-  {
-    risk: 'zaostrzające się regulacje',
-    answer: 'wsparcie raportowania i danych ESG',
-    icon: ClipboardCheck,
-  },
-  {
-    risk: 'ryzyko awarii, zatorów i przestojów',
-    answer: 'większa odporność operacyjna zakładu',
-    icon: AlertTriangle,
-  },
-  {
-    risk: 'wysoki CAPEX lokalnych modernizacji',
-    answer: 'ograniczenie nakładów po stronie klienta',
-    icon: Truck,
-  },
+const risks = [
+  'koszt odbioru i oczyszczania',
+  'presja regulacyjna i ESG',
+  'ryzyko przestojów',
 ];
 
 export const ProblemSection: React.FC = () => {
   return (
-    <section id="problem" className="bg-white py-20 sm:py-24">
+    <section id="problem" className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
+            transition={{ duration: 0.5 }}
           >
-            <p className="section-kicker">Problem rynkowy</p>
-            <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight text-brand-dark sm:text-4xl">
-              Ścieki w FMCG są jednocześnie kosztem, ryzykiem i niewykorzystanym zasobem.
+            <p className="section-kicker">Problem</p>
+            <h2 className="mt-3 max-w-xl text-3xl font-black leading-tight text-brand-dark sm:text-4xl">
+              Woda wchodzi do procesu, a większość wraca jako kosztowny ściek.
             </h2>
+            <p className="mt-4 max-w-xl text-base leading-8 text-gray-600">
+              Sedno projektu: zebrać duży wolumen w regionie i odzyskać z niego wartość, której pojedynczy zakład zwykle nie monetyzuje.
+            </p>
+
+            <div className="mt-7 grid gap-3">
+              {risks.map((risk) => (
+                <div key={risk} className="flex items-center gap-3 rounded-md border border-red-100 bg-red-50 px-4 py-3 text-sm font-bold text-brand-dark">
+                  <AlertTriangle className="h-4 w-4 shrink-0 text-red-500" />
+                  {risk}
+                </div>
+              ))}
+            </div>
           </motion.div>
-          <motion.p
+
+          <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="max-w-2xl text-base leading-8 text-gray-600 lg:ml-auto"
+            className="rounded-lg border border-gray-200 bg-brand-paper p-4 shadow-sm sm:p-6"
           >
-            Branża potrzebuje rozwiązania, które agreguje wolumeny, stabilizuje odbiór ścieków i zamienia presję regulacyjną w mierzalny odzysk wartości dla zakładów oraz regionów.
-          </motion.p>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {facts.map(({ icon: Icon, value, unit, label, note, animated }, index) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="rounded-lg border border-gray-200 bg-brand-paper p-6 shadow-sm"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-brand-blue-dark shadow-sm">
-                <Icon className="h-5 w-5" />
+            <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center">
+              <div className="rounded-lg bg-white p-5 shadow-sm">
+                <Factory className="h-6 w-6 text-brand-blue-dark" />
+                <p className="mt-5 text-sm font-black uppercase tracking-[0.12em] text-gray-500">FMCG</p>
+                <p className="mt-2 text-3xl font-black text-brand-dark">250-300</p>
+                <p className="text-sm font-bold text-brand-blue-dark">mln m³ wody / rok</p>
               </div>
-              <div className="mt-6 flex items-end gap-2">
-                <div className="text-4xl font-black leading-none text-brand-dark">
-                  {animated ? <AnimatedNumber to={Number(value)} /> : value}
+
+              <ArrowRight className="mx-auto hidden h-6 w-6 text-brand-green lg:block" />
+
+              <div className="rounded-lg bg-white p-5 shadow-sm">
+                <Recycle className="h-6 w-6 text-brand-green" />
+                <p className="mt-5 text-sm font-black uppercase tracking-[0.12em] text-gray-500">Powrót jako ściek</p>
+                <p className="mt-2 text-4xl font-black text-brand-green">
+                  <AnimatedNumber to={80} />%
+                </p>
+                <div className="mt-4 h-3 overflow-hidden rounded-full bg-gray-100">
+                  <motion.div
+                    className="h-full rounded-full bg-brand-green"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '80%' }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.9, ease: 'easeOut' }}
+                  />
                 </div>
-                <div className="pb-1 text-lg font-black text-brand-green">{unit}</div>
               </div>
-              <p className="mt-3 font-bold text-brand-dark">{label}</p>
-              <p className="mt-2 text-sm leading-6 text-gray-600">{note}</p>
-            </motion.div>
-          ))}
+
+              <ArrowRight className="mx-auto hidden h-6 w-6 text-brand-green lg:block" />
+
+              <div className="rounded-lg bg-white p-5 shadow-sm">
+                <Droplets className="h-6 w-6 text-brand-blue-dark" />
+                <p className="mt-5 text-sm font-black uppercase tracking-[0.12em] text-gray-500">Skala problemu</p>
+                <p className="mt-2 text-3xl font-black text-brand-dark">200-240</p>
+                <p className="text-sm font-bold text-brand-blue-dark">mln m³ ścieków / rok</p>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-md border border-brand-blue/20 bg-white px-4 py-3">
+                <Gauge className="h-4 w-4 text-brand-blue-dark" />
+                <p className="mt-2 text-sm font-bold text-gray-700">Skala uzasadnia model infrastrukturalny, nie tylko punktowe rozwiązania.</p>
+              </div>
+              <div className="rounded-md border border-green-200 bg-green-50 px-4 py-3">
+                <ShieldCheck className="h-4 w-4 text-brand-green" />
+                <p className="mt-2 text-sm font-bold text-gray-700">Hub rozkłada CAPEX, ryzyko i kompetencje na partnerstwo regionalne.</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="mt-12 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6"
-        >
-          <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-            <div>
-              <h3 className="text-lg font-black text-brand-dark">Kluczowe ryzyka dla firm FMCG</h3>
-              <div className="mt-4 grid gap-3">
-                {riskMap.map(({ risk, icon: Icon }) => (
-                  <div key={risk} className="flex items-center gap-3 rounded-md bg-red-50/70 px-4 py-3 text-sm font-bold text-brand-dark">
-                    <Icon className="h-4 w-4 shrink-0 text-red-500" />
-                    {risk}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="hidden h-full w-px bg-gray-200 lg:block" />
-
-            <div>
-              <h3 className="text-lg font-black text-brand-dark">RegioODzysk jako odpowiedź</h3>
-              <div className="mt-4 grid gap-3">
-                {riskMap.map(({ answer }) => (
-                  <div key={answer} className="flex items-center gap-3 rounded-md bg-green-50 px-4 py-3 text-sm font-bold text-brand-dark">
-                    <ShieldCheck className="h-4 w-4 shrink-0 text-brand-green" />
-                    {answer}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

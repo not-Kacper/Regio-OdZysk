@@ -48,6 +48,14 @@ a {
   box-shadow: inset 0 0 0 1px rgba(14, 165, 233, 0.18), 0 10px 28px rgba(6, 20, 50, 0.12);
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .section-kicker {
   display: inline-flex;
   align-items: center;
