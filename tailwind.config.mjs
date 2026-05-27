@@ -6,12 +6,14 @@ export default {
 			colors: {
 				brand: {
 					white: '#ffffff',
-					gray: '#f3f4f6', // jasnoszary
+					paper: '#f6f9fc',
+					gray: '#e9eef5',
 					blue: '#0ea5e9', // woda
-					'blue-dark': '#0369a1',
-					green: '#10b981', // cyrkularność, środowisko
-					'green-dark': '#047857',
-					dark: '#111827'
+					'blue-soft': '#e5f4ff',
+					'blue-dark': '#075985',
+					green: '#16a34a', // cyrkularność, środowisko
+					'green-dark': '#15803d',
+					dark: '#061432'
 				}
 			},
 			fontFamily: {
