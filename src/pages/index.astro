@@ -1,11 +1,190 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { HeroSection } from '../components/HeroSection';
+import { ProblemSection } from '../components/ProblemSection';
+import { InteractiveHub } from '../components/InteractiveHub';
+import { Slide3Diagram } from '../components/Slide3Diagram';
+import '../styles/global.css';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="pl" class="scroll-smooth">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>RegioODzysk - Cyrkularność w przemyśle FMCG</title>
+	</head>
+	<body class="antialiased text-gray-900 bg-white">
+		{/* Navbar */}
+		<nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between items-center h-20">
+					<div class="flex items-center gap-2 cursor-pointer">
+						<div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+							<span class="text-white font-bold text-xl leading-none">R</span>
+						</div>
+						<span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-gray-600">
+							RegioODzysk
+						</span>
+					</div>
+					<div class="hidden md:flex items-center gap-8">
+						<a href="#problem" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Wyzwania</a>
+						<a href="#rozwiazanie" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Rozwiązanie</a>
+						<a href="#wartosc" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Wartość Biznesowa</a>
+						<a href="#zespol" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Zespół</a>
+						<a href="#kontakt" class="px-5 py-2.5 rounded-lg bg-brand-dark text-white text-sm font-medium hover:bg-gray-800 transition-colors">
+							Kontakt dla inwestorów
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+
+	<main>
+		<HeroSection client:load />
+		<ProblemSection client:visible />
+                
+                {/* Schemat działania - Rozwiązanie */}
+                <section id="rozwiazanie" class="py-24 bg-white overflow-hidden border-t border-gray-100">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div class="text-center mb-16">
+                                        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">Jak działa RegioODzysk?</h2>
+                                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Przekształcenie liniowego modelu zużycia w pełną cyrkularność zasobów przemysłowych.</p>
+                                </div>
+                                <Slide3Diagram client:visible />
+                        </div>
+                </section>
+
+		<section id="wartosc" class="py-24 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">Model Biznesowy Dającego Wartość</h2>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">Zdywersyfikowane źródła przychodów i korzyści dla wszystkich interesariuszy.</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					{/* Karta 1 */}
+					<div class="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+						<div class="w-12 h-12 bg-blue-50 text-brand-blue rounded-xl flex items-center justify-center text-2xl mb-6">🏭</div>
+						<h3 class="text-xl font-bold text-brand-dark mb-3">Dla Zakładu FMCG</h3>
+						<ul class="space-y-2 text-gray-600">
+							<li>Redukcja kosztów zrzutu ścieków</li>
+							<li>Dostęp do taniej wody poprocesowej</li>
+							<li>Zgodność z rygorystycznymi normami (ESG)</li>
+						</ul>
+					</div>
+					{/* Karta 2 */}
+					<div class="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+						<div class="w-12 h-12 bg-green-50 text-brand-green rounded-xl flex items-center justify-center text-2xl mb-6">🏙️</div>
+						<h3 class="text-xl font-bold text-brand-dark mb-3">Dla Regionu</h3>
+						<ul class="space-y-2 text-gray-600">
+							<li>Ochrona lokalnych zasobów wodnych</li>
+							<li>Mniejsze obciążenie wodociągów</li>
+							<li>Innowacja w lokalnej gospodarce</li>
+						</ul>
+					</div>
+					{/* Karta 3 */}
+					<div class="p-8 border border-brand-blue bg-blue-50 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+						<div class="w-12 h-12 bg-white text-brand-blue rounded-xl flex items-center justify-center text-2xl mb-6 shadow-sm">📈</div>
+						<h3 class="text-xl font-bold text-brand-dark mb-3">Dla Inwestora</h3>
+						<ul class="space-y-2 text-gray-700">
+							<li>Opłaty za gotowość i oczyszczanie (SaaS/IaaS)</li>
+							<li>Przychody ze sprzedaży surowców (biogaz, nawozy)</li>
+							<li>Długoterminowe B2B kontrakty</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{/* Impakt ESG */}
+		<section class="py-24 bg-brand-dark text-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Mierzalny Wpływ ESG</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+					<div>
+						<div class="text-4xl mb-4">🌍</div>
+						<h3 class="text-xl font-bold text-brand-green mb-2">Środowisko (E)</h3>
+						<p class="text-gray-300 text-sm leading-relaxed">Redukcja śladu węglowego i wodnego. Odzysk wody i cennych minerałów chroni bioróżnorodność i lokalne ekosystemy.</p>
+					</div>
+					<div>
+						<div class="text-4xl mb-4">👥</div>
+						<h3 class="text-xl font-bold text-brand-blue mb-2">Społeczeństwo (S)</h3>
+						<p class="text-gray-300 text-sm leading-relaxed">Zwiększone bezpieczeństwo sanitarne regionu, tworzenie zielonych miejsc pracy, budowanie świadomości cyrkularnej.</p>
+					</div>
+					<div>
+						<div class="text-4xl mb-4">🏢</div>
+						<h3 class="text-xl font-bold text-brand-white mb-2">Gospodarka (G)</h3>
+						<p class="text-gray-300 text-sm leading-relaxed">Zwiększenie odporności biznesu na szoki regulacyjne, transparentne raporty dla inwestorów, zysk z innowacji.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{/* Zespół */}
+		<section id="zespol" class="py-24 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">Inicjatorki Projektu</h2>
+					<p class="text-lg text-gray-600 mb-2">Projekt stworzony w ramach Akademii Leona Koźmińskiego</p>
+				</div>
+				<div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+					{[
+						"Katarzyna Sadowska", 
+						"Paulina Pawlak", 
+						"Joanna Michalska", 
+						"Magdalena Boratyńska-Soral", 
+						"Aldona Tulikowska-Chwalisz"
+					].map((name) => (
+						<div class="text-center flex flex-col items-center">
+							<div class="w-24 h-24 bg-gray-200 rounded-full mb-4 shadow-inner overflow-hidden">
+								<svg class="w-full h-full text-gray-400 p-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+							</div>
+							<h4 class="font-semibold text-brand-dark text-sm">{name}</h4>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+
+	{/* Footer */}
+	<footer id="kontakt" class="bg-white border-t border-gray-100 pt-16 pb-8">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+				<div class="lg:col-span-2">
+					<div class="flex items-center gap-2 mb-4">
+						<div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center">
+							<span class="text-white font-bold text-xl leading-none">R</span>
+						</div>
+						<span class="text-2xl font-bold text-brand-dark">RegioODzysk</span>
+					</div>
+					<p class="text-gray-500 max-w-sm">Ścieki przemysłu FMCG w centrum cyrkularności. Razem zamieniamy obciążenie środowiskowe w wartość rynkową.</p>
+				</div>
+				<div>
+					<h4 class="font-bold text-brand-dark mb-4">Nawigacja</h4>
+					<ul class="space-y-2 text-sm text-gray-500">
+						<li><a href="#problem" class="hover:text-brand-blue">Wyzwania</a></li>
+						<li><a href="#rozwiazanie" class="hover:text-brand-blue">Model rozwiązania</a></li>
+						<li><a href="#wartosc" class="hover:text-brand-blue">Korzyści</a></li>
+						<li><a href="#zespol" class="hover:text-brand-blue">Zespół</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="font-bold text-brand-dark mb-4">Gotowy do rozmowy?</h4>
+					<a href="mailto:kontakt@regioodzysk.pl" class="inline-block px-6 py-3 bg-brand-blue text-white font-medium rounded-lg hover:bg-brand-blue-dark transition-colors text-sm w-full text-center">
+						Skontaktuj się z nami
+					</a>
+				</div>
+			</div>
+			<div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+				<p>© {new Date().getFullYear()} RegioODzysk. Wszelkie prawa zastrzeżone.</p>
+				<div class="flex gap-4 mt-4 md:mt-0">
+					<a href="#" class="hover:text-gray-600">Polityka prywatności</a>
+					<a href="#" class="hover:text-gray-600">Regulamin</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</body>
+</html>
